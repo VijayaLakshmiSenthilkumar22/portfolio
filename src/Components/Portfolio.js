@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Mail, Linkedin, Code, Briefcase, GraduationCap, Award, Zap, Target, Database, TrendingUp, ChevronRight, CornerRightDown, MapPin, Clock, GitCommit, Settings, Server } from 'lucide-react';
 
-// --- Utility Components ---
 
-// 1. Accent Title Component (Sticky Header) - Z-index set to z-30
 const AccentSectionTitle = ({ children, icon: Icon }) => (
   <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-8 sm:mb-10 border-b border-cyan-500/50 pb-3 flex items-center 
         sticky top-20 bg-gray-900/90 backdrop-blur-sm z-30 transition-shadow duration-300 shadow-xl shadow-black/30">
@@ -12,14 +10,12 @@ const AccentSectionTitle = ({ children, icon: Icon }) => (
   </h2>
 );
 
-// 2. Main Container Card
 const DarkCard = ({ children, className = '' }) => (
   <div className={`p-4 sm:p-6 md:p-8 rounded-xl bg-gray-800 border border-gray-700 shadow-2xl transition-all duration-300 hover:border-cyan-500 ${className}`}>
     {children}
   </div>
 );
 
-// 3. Project Detail Component
 const ProjectDetail = ({ project }) => (
   <DarkCard className="space-y-3 sm:space-y-4">
     <div className="flex items-start justify-between">
@@ -55,7 +51,6 @@ const ProjectDetail = ({ project }) => (
   </DarkCard>
 );
 
-// 4. Skillset Category Component (Static Grid)
 const NewSkillCategoryList = ({ category, items, icon: Icon }) => (
   <div className="p-4 sm:p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-cyan-500 transition duration-300">
     <h3 className="text-lg sm:text-xl font-bold text-white mb-3 border-b border-gray-700 pb-2 flex items-center">
@@ -75,7 +70,6 @@ const NewSkillCategoryList = ({ category, items, icon: Icon }) => (
   </div>
 );
 
-// --- DATA DEFINITIONS ---
 
 const projects = [
     {
@@ -108,12 +102,10 @@ const projects = [
     }
   ];
 
-// --- MAIN PORTFOLIO COMPONENT ---
 
 export default function ProfessionalPortfolio() {
   const sectionKeys = ['overview', 'skills', 'projects', 'experience', 'education', 'certifications'];
   const [activeTab, setActiveTab] = useState(sectionKeys[0]);
-  // RESTORED STATES:
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0); 
   const [isFading, setIsFading] = useState(false); 
   
@@ -133,7 +125,6 @@ export default function ProfessionalPortfolio() {
     certifications: certificationsRef
   };
 
-  // --- SCROLL OFFSET LOGIC ---
   const scrollToSection = useCallback((section) => {
     const element = sectionRefs[section]?.current;
     if (element) {
@@ -151,40 +142,34 @@ export default function ProfessionalPortfolio() {
   }, [sectionRefs]);
 
 
-  // --- 1. Sub-Scroll Logic for Projects (2 seconds per project) - RESTORED ---
   useEffect(() => {
     if (activeTab !== 'projects') {
       setCurrentProjectIndex(0); 
       return;
     }
 
-    const projectDuration = 2000; // 2 seconds total cycle time
-    const fadeOutDuration = 500; // 0.5 seconds for fade out
+    const projectDuration = 2000; 
+    const fadeOutDuration = 500; 
 
     const projectTimer = setInterval(() => {
-        setIsFading(true); // Start fade-out
+        setIsFading(true); 
         
-        // Wait for fade-out to complete (500ms) before changing content
         setTimeout(() => {
             const isLastProject = currentProjectIndex === projects.length - 1;
             
             if (isLastProject) {
-                // If we are on the last project, let the main timer handle the advance 
-                // and break the project cycle
+              
                 clearInterval(projectTimer);
             } else {
-                // Move to the next project index
                 setCurrentProjectIndex(prevIndex => prevIndex + 1);
-                setIsFading(false); // Start fade-in immediately after index change
+                setIsFading(false); 
             }
         }, fadeOutDuration);
 
     }, projectDuration);
 
-    // If we are at the last project, we need to clear the project timer
-    // and let the main timer (useEffect 2) handle the advance.
+    
     if (activeTab === 'projects' && currentProjectIndex === projects.length - 1) {
-        // Only clear the interval if the condition is met upon rendering
         return; 
     }
 
@@ -192,17 +177,12 @@ export default function ProfessionalPortfolio() {
   }, [activeTab, currentProjectIndex]);
 
 
-  // --- 2. Main Automatic Vertical Scrolling Logic (Pauses for Project Cycle) - RESTORED ---
   useEffect(() => {
-    // Standard duration for most sections
     const defaultDuration = 2500; 
     
-    // The main timer only advances if we are NOT in the 'projects' section,
-    // OR if we have cycled through all projects (i.e., at the last project index).
     const isReadyToAdvance = activeTab !== 'projects' || currentProjectIndex === projects.length - 1;
 
-    // Determine the duration based on readiness
-    const currentDuration = isReadyToAdvance ? defaultDuration : 2000; // If not ready, use project cycle time
+    const currentDuration = isReadyToAdvance ? defaultDuration : 2000; 
 
     if (!isReadyToAdvance && activeTab === 'projects') return;
 
@@ -217,7 +197,6 @@ export default function ProfessionalPortfolio() {
       const nextIndex = (currentIndex + 1) % sectionKeys.length;
       const nextSection = sectionKeys[nextIndex];
       
-      // If we are advancing FROM the projects section, reset the project index
       if (activeTab === 'projects') {
           setCurrentProjectIndex(0);
       }
@@ -229,7 +208,6 @@ export default function ProfessionalPortfolio() {
   }, [activeTab, sectionKeys, scrollToSection, currentProjectIndex]); 
 
 
-  // --- 3. Intersection Observer for Manual Scrolling Feedback ---
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -258,7 +236,6 @@ export default function ProfessionalPortfolio() {
     };
   }, [sectionRefs]); 
 
-  // --- Data Definitions (Skills and non-project data) ---
   const skills = {
     'Frontend Core': { 
       items: ['React.js', 'Redux', 'TypeScript', 'JavaScript (ES6+)', 'HTML', 'React Flow'],
@@ -291,15 +268,12 @@ export default function ProfessionalPortfolio() {
     { degree: 'Higher Secondary (HSC)', institution: 'M.A.N.U Girls Higher Sec School', details: 'Percentage: 93%' },
     { degree: 'Secondary (SSLC)', institution: 'M.A.N.U Girls Higher Sec School', details: 'Percentage: 86%' },
   ];
-  // ---------------------------------------------------------------------
 
   return (
     <div className="bg-gray-900 text-white min-h-screen font-sans scroll-smooth">
 
-      {/* FIXED NAVIGATION (z-50) */}
       <nav className="sticky top-0 w-full bg-gray-900/95 backdrop-blur-sm z-50 p-2 sm:p-3 md:p-4 flex justify-center gap-2 sm:gap-3 flex-wrap shadow-lg shadow-black/50 border-b border-gray-700">
         
-        {/* Navigation Tabs */}
         {sectionKeys.map(tab => (
           <button
             key={tab}
@@ -317,7 +291,6 @@ export default function ProfessionalPortfolio() {
 
       <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16 space-y-16 sm:space-y-24">
 
-        {/* 1. OVERVIEW (Z-40 covers the sticky header Z-30 below it) */}
         <div ref={overviewRef} id="overview" className="relative z-40 bg-gray-900">
             <div className="space-y-6 text-center pt-8 border-b border-gray-700/50 pb-12">
                 
@@ -352,7 +325,6 @@ export default function ProfessionalPortfolio() {
 
         <hr className="border-gray-800" /> 
         
-        {/* 2. SKILLS (Sticky Header - z-30) */}
         <section ref={skillsRef} className="space-y-8 sm:space-y-10">
           <AccentSectionTitle icon={Code}>Technical Skillset</AccentSectionTitle>
           
@@ -370,17 +342,14 @@ export default function ProfessionalPortfolio() {
 
         <hr className="border-gray-800" /> 
         
-        {/* 3. PROJECTS (RE-IMPLEMENTED CYCLING DISPLAY) */}
         <section ref={projectsRef} className="space-y-8 sm:space-y-10">
           <AccentSectionTitle icon={Briefcase}>Key Development Projects</AccentSectionTitle>
 
           <div className="space-y-6 sm:space-y-8">
-            {/* Project Detail Wrapper with Fade Transition */}
             <div className={`transition-opacity duration-500 ${isFading ? 'opacity-0' : 'opacity-100'}`}>
                 <ProjectDetail project={projects[currentProjectIndex]} />
             </div>
             
-            {/* Visual indicator of sub-scroll progress */}
             <div className="text-center text-gray-500 text-sm font-medium pt-2">
                 Project {currentProjectIndex + 1} of {projects.length}
             </div>
@@ -389,7 +358,6 @@ export default function ProfessionalPortfolio() {
 
         <hr className="border-gray-800" /> 
         
-        {/* 4. EXPERIENCE (Sticky Header) */}
         <section ref={experienceRef} className="space-y-8 sm:space-y-10">
           <AccentSectionTitle icon={Briefcase}>Professional Experience</AccentSectionTitle>
           
@@ -404,7 +372,6 @@ export default function ProfessionalPortfolio() {
                 <Clock className="w-4 h-4 mr-2" /> Sep 2024 - Present
               </p>
 
-              {/* Responsibility/Detail List */}
               <ul className="text-gray-300 text-xs sm:text-sm space-y-2 border-t border-gray-600 pt-3">
                   <li className="flex items-start">
                       <ChevronRight className="w-4 h-4 mt-1 mr-2 text-cyan-400 flex-shrink-0" />
@@ -433,7 +400,6 @@ export default function ProfessionalPortfolio() {
 
         <hr className="border-gray-800" /> 
 
-        {/* 5. EDUCATION (Sticky Header) */}
         <section ref={educationRef} className="space-y-8 sm:space-y-10">
           <AccentSectionTitle icon={GraduationCap}>Academic History</AccentSectionTitle>
           
@@ -450,7 +416,6 @@ export default function ProfessionalPortfolio() {
 
         <hr className="border-gray-800" /> 
 
-        {/* 6. CERTIFICATIONS (Sticky Header) */}
         <section ref={certificationsRef} className="space-y-8 sm:space-y-10">
           <AccentSectionTitle icon={Award}>Certifications</AccentSectionTitle>
           
@@ -470,7 +435,6 @@ export default function ProfessionalPortfolio() {
 
       </div>
       
-      {/* Footer */}
       <footer className="py-6 text-center border-t border-gray-700 mt-12 sm:mt-16 bg-gray-900 text-gray-500">
         <p className="text-sm">Designed and Developed by Vijayalakshmi S</p>
         <p className="text-xs mt-1">Built with React & Tailwind CSS</p>
