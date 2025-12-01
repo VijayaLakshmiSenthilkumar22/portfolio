@@ -255,7 +255,7 @@ export default function ProfessionalPortfolio() {
               I am a dedicated full-stack developer with over a year of professional experience in building scalable web applications. My expertise lies in creating seamless user experiences and robust backend architectures using modern technologies.
             </p>
             <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 sm:mb-6">
-              Currently serving as an Associate Software Engineer at BAPS, I specialize in <strong className="text-amber-500">Software</strong> development. My approach combines clean code principles, modern development practices, and attention to detail to deliver solutions that exceed expectations.
+              Currently serving as an Associate Software Engineer at BA PRODUCTS AND SYSTEMS INDIA PRIVATE LIMITED, I specialize in <strong className="text-amber-500">Software</strong> development. My approach combines clean code principles, modern development practices, and attention to detail to deliver solutions that exceed expectations.
             </p>
             <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
               I am passionate about continuous learning and staying current with industry best practices. My goal is to contribute to innovative projects that make a meaningful impact while growing as a software engineer.
@@ -296,7 +296,7 @@ export default function ProfessionalPortfolio() {
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3 sm:mb-4">
                   <div>
                     <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">Associate Software Engineer</h3>
-                    <div className="text-base sm:text-lg text-amber-500 font-medium">BAPS</div>
+                    <div className="text-base sm:text-lg text-amber-500 font-medium">BA PRODUCTS AND SYSTEMS INDIA PRIVATE LIMITED</div>
                   </div>
                   <div className="mt-2 md:mt-0 text-right text-xs sm:text-sm">
                     <div className="text-gray-400 flex items-center gap-2 mb-1 justify-end">
@@ -377,11 +377,11 @@ export default function ProfessionalPortfolio() {
             {projects.map((project, idx) => (
               <div
                 key={idx}
-                // Reduced min-height slightly for mobile
-                className="border border-gray-700 rounded-lg p-6 sm:p-8 hover:shadow-2xl transition-shadow bg-gray-900 flex flex-col min-h-[350px] sm:min-h-[400px]" 
+                // FIXED: Reduced main card padding for a smaller overall size
+                className="border border-gray-700 rounded-lg p-4 sm:p-6 hover:shadow-2xl transition-shadow bg-gray-900 flex flex-col" 
               >
                 {/* Project Header and Link */}
-                <div className="flex justify-between items-start mb-3 sm:mb-4">
+                <div className="flex justify-between items-start mb-2 sm:mb-3">
                   <h3 className="text-lg sm:text-xl font-bold text-white">
                     {project.title}
                   </h3>
@@ -391,13 +391,13 @@ export default function ProfessionalPortfolio() {
                 </div>
 
                 {/* Description */}
-                <p className="text-sm text-gray-400 mb-3 sm:mb-4 leading-relaxed flex-grow">
+                <p className="text-sm text-gray-400 mb-2 sm:mb-3 leading-relaxed">
                   {project.description}
                 </p>
 
-                {/* Key Impact */}
-                <div className="bg-gray-800 p-3 sm:p-4 rounded mb-3 sm:mb-4 border-l-4 border-amber-500">
-                  <div className="text-xs font-semibold text-amber-500 mb-1">KEY IMPACT</div>
+                {/* Key Impact - FIXED: Reduced internal padding and margin */}
+                <div className="bg-gray-800 p-2 sm:p-3 rounded mb-2 sm:mb-3 border-l-4 border-amber-500">
+                  <div className="text-xs font-semibold text-amber-500 mb-0.5">KEY IMPACT</div>
                   <div className="text-sm text-white">{project.impact}</div>
                 </div>
 
@@ -407,7 +407,7 @@ export default function ProfessionalPortfolio() {
                     {project.tech.map((tech, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-gray-700 text-gray-200 rounded text-xs font-medium"
+                        className="px-3 py-1.5 sm:px-4 sm:py-2 bg-gray-700 text-gray-200 rounded text-xs font-medium"
                       >
                         {tech}
                       </span>
