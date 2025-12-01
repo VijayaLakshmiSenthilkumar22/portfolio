@@ -362,15 +362,15 @@ export default function ProfessionalPortfolio() {
                 <div className="space-y-3 mt-6">
                   <div className="flex items-start gap-3">
                     <ChevronRight size={20} className="text-amber-500 mt-1 flex-shrink-0" />
-                    <p className="text-gray-300">Gained practical experience in **Manual Testing** and executed test cases on live applications to ensure quality assurance.</p>
+                    <p className="text-gray-300">Gained practical experience in Manual Testing and executed test cases on live applications to ensure quality assurance.</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <ChevronRight size={20} className="text-amber-500 mt-1 flex-shrink-0" />
-                    <p className="text-gray-300">Learned and applied tools for specialized testing, including **JMeter for Performance Testing** and **Postman for API testing**.</p>
+                    <p className="text-gray-300">Learned and applied tools for specialized testing, including JMeter for Performance Testing and Postman for API testing.</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <ChevronRight size={20} className="text-amber-500 mt-1 flex-shrink-0" />
-                    <p className="text-gray-300">Supported the team by performing **Unit Testing** procedures and documenting test results and bug reports.</p>
+                    <p className="text-gray-300">Supported the team by performing Unit Testing procedures and documenting test results and bug reports.</p>
                   </div>
                 </div>
               </div>
