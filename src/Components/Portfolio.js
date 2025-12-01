@@ -119,13 +119,10 @@ export default function ProfessionalPortfolio() {
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-gray-900/95 backdrop-blur-sm shadow-xl' : 'bg-transparent'}`}>
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            {/* Logo/Name */}
-            <a href="#home" onClick={() => scrollToSection('home')} className="text-xl font-serif font-bold text-amber-500 cursor-pointer">
-              Vijayalakshmi S
-            </a>
+            {/* 1. Logo/Name (Left) */}
             
-            {/* Desktop Menu */}
-            <div className="hidden md:flex gap-8">
+            {/* 2. Desktop Menu (Centered) */}
+            <div className="hidden md:flex gap-8 mx-auto">
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -142,7 +139,7 @@ export default function ProfessionalPortfolio() {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* 3. Mobile Menu Button (Right) */}
             <button 
               className="md:hidden text-gray-300 hover:text-amber-500 transition-colors"
               onClick={toggleMenu}
@@ -150,6 +147,9 @@ export default function ProfessionalPortfolio() {
             >
               <Menu size={24} />
             </button>
+            
+            {/* 4. Desktop Placeholder for Centering (Mirrors Logo width) */}
+            <div className="hidden md:block w-auto min-w-[3rem]"></div> 
 
           </div>
         </div>
@@ -382,7 +382,7 @@ export default function ProfessionalPortfolio() {
                 <div
                   key={idx}
                   className="group relative bg-gray-900 border border-gray-700 rounded-xl p-6 sm:p-8 
-                          transition-all duration-300 ease-in-out hover:shadow-2xl hover:border-amber-500 hover:scale-[1.01]"
+                    transition-all duration-300 ease-in-out hover:shadow-2xl hover:border-amber-500 hover:scale-[1.01]"
                 >
                   {/* Project Header and Link */}
                   <div className="flex justify-between items-start mb-3 sm:mb-4">
@@ -405,7 +405,7 @@ export default function ProfessionalPortfolio() {
                       <span
                         key={i}
                         className="px-3 py-1 bg-gray-700 text-gray-200 rounded text-xs font-medium 
-                                  group-hover:bg-amber-500 group-hover:text-gray-900 transition-colors"
+                              group-hover:bg-amber-500 group-hover:text-gray-900 transition-colors"
                       >
                         {tech}
                       </span>
