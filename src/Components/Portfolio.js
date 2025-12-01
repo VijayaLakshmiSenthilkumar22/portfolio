@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Linkedin, ExternalLink, GraduationCap, Award, Calendar, MapPin,ChevronRight } from 'lucide-react';
+import { Mail, Linkedin, ExternalLink, GraduationCap, Award, Calendar, MapPin, ChevronRight, Menu, X } from 'lucide-react';
 
 export default function ProfessionalPortfolio() {
+  // --- State Variables ---
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // New state for mobile menu
 
+  // --- Data Definitions (Unchanged) ---
   const projects = [
     {
       title: 'TaskFlow – Team Task & Workflow Management System',
@@ -59,47 +62,16 @@ export default function ProfessionalPortfolio() {
   };
 
   const certifications = [
-   { 
-      name: 'Oracle Database SQL Certified Associate', 
-      org: 'Oracle', 
-      date: 'July 2023',
-      link: '#'
-    }, { 
-      name: 'Schema Design Optimization', 
-      org: 'MongoDB', 
-      date: 'November 2025', 
-      credentialId: 'MDB7m73i11el8', 
-      link: '#' 
-    },
-    { 
-      name: 'Relational to Document Model', 
-      org: 'MongoDB', 
-      date: 'November 2025', 
-      link: '#' 
-    },
-    { 
-      name: 'HTML CSS', 
-      org: 'Open Weaver', 
-      date: 'July 2023',
-      link: '#'
-    },
-    
-    { 
-      name: 'Academic Process Mining Fundamental', 
-      org: 'Celonis', 
-      date: 'July 2023',
-      link: '#'
-    },
-    { 
-      name: 'JMeter - Performance Testing', 
-      org: 'SimpliLearn', 
-      date: 'July 2025',
-      link: '#'
-    }
+    { name: 'Oracle Database SQL Certified Associate', org: 'Oracle', date: 'July 2023', link: '#' },
+    { name: 'Schema Design Optimization', org: 'MongoDB', date: 'November 2025', credentialId: 'MDB7m73i11el8', link: '#' },
+    { name: 'Relational to Document Model', org: 'MongoDB', date: 'November 2025', link: '#' },
+    { name: 'HTML CSS', org: 'Open Weaver', date: 'July 2023', link: '#' },
+    { name: 'Academic Process Mining Fundamental', org: 'Celonis', date: 'July 2023', link: '#' },
+    { name: 'JMeter - Performance Testing', org: 'SimpliLearn', date: 'July 2025', link: '#' }
   ];
   // --- End Data Definitions ---
 
-  // --- Effect and Handlers (Unchanged logic) ---
+  // --- Effect and Handlers ---
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -128,7 +100,13 @@ export default function ProfessionalPortfolio() {
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      // Close menu after clicking on mobile
+      setIsMenuOpen(false); 
     }
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
   // --- End Effect and Handlers ---
 
@@ -136,15 +114,18 @@ export default function ProfessionalPortfolio() {
   return (
     <div className="bg-gray-900 text-white min-h-screen font-sans">
       
-      {/* Navigation (Omitted for brevity) */}
+      {/* 🚀 Navigation - Updated for Mobile 🚀 */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-gray-900/95 backdrop-blur-sm shadow-xl' : 'bg-transparent'}`}>
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
+            {/* Logo/Name */}
             <div className="text-xl font-serif font-bold text-amber-500">
               Vijayalakshmi S
             </div>
+            
+            {/* Desktop Menu */}
             <div className="hidden md:flex gap-8">
-              {['Home', 'About', 'Experience', 'Projects', 'Skills', 'Contact'].map((item) => (
+              {['Home', 'About', 'Experience', 'Projects', 'Skills', 'Education', 'Certifications', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -159,11 +140,55 @@ export default function ProfessionalPortfolio() {
                 </button>
               ))}
             </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden text-gray-300 hover:text-amber-500 transition-colors"
+              onClick={toggleMenu}
+              aria-label="Toggle navigation menu"
+            >
+              <Menu size={24} />
+            </button>
+
           </div>
         </div>
       </nav>
 
-      {/* Hero Section (Omitted for brevity) */}
+      {/* 🚀 Mobile Slide-Out Menu 🚀 */}
+      <div 
+        className={`fixed top-0 left-0 w-full h-full z-40 bg-gray-900 transition-transform duration-300 ease-in-out md:hidden ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex justify-end p-6">
+          <button 
+            onClick={toggleMenu} 
+            className="text-gray-300 hover:text-amber-500"
+            aria-label="Close navigation menu"
+          >
+            <X size={28} />
+          </button>
+        </div>
+        <div className="flex flex-col items-center gap-6 pt-10">
+          {['Home', 'About', 'Experience', 'Projects', 'Skills', 'Education', 'Certifications', 'Contact'].map((item) => (
+            <button
+              key={item}
+              onClick={() => scrollToSection(item.toLowerCase())}
+              className={`text-2xl font-bold transition-colors ${
+                activeSection === item.toLowerCase() ? 'text-amber-500' : 'text-gray-300 hover:text-amber-500'
+              }`}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
+      {/* End Mobile Menu */}
+
+
+      {/* Main Content Sections (Unchanged) */}
+
+      {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center px-6 bg-gray-900">
         <div className="max-w-4xl mx-auto text-center pt-24">
           <div className="mb-6">
@@ -219,8 +244,8 @@ export default function ProfessionalPortfolio() {
           </div>
         </div>
       </section>
-
-      {/* About Section (Omitted for brevity) */}
+      
+      {/* About Section */}
       <section id="about" className="py-24 px-6 bg-gray-800">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-serif font-bold mb-12 text-center text-white">
@@ -256,7 +281,7 @@ export default function ProfessionalPortfolio() {
         </div>
       </section>
 
-      {/* Experience Section (Omitted for brevity) */}
+      {/* Experience Section */}
       <section id="experience" className="py-24 px-6 bg-gray-900">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-serif font-bold mb-12 text-center text-white">
@@ -337,15 +362,15 @@ export default function ProfessionalPortfolio() {
                 <div className="space-y-3 mt-6">
                   <div className="flex items-start gap-3">
                     <ChevronRight size={20} className="text-amber-500 mt-1 flex-shrink-0" />
-                    <p className="text-gray-300">Gained practical experience in Manual Testing and executed test cases on live applications to ensure quality assurance.</p>
+                    <p className="text-gray-300">Gained practical experience in **Manual Testing** and executed test cases on live applications to ensure quality assurance.</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <ChevronRight size={20} className="text-amber-500 mt-1 flex-shrink-0" />
-                    <p className="text-gray-300">Learned and applied tools for specialized testing, including JMeter for Performance Testing and **Postman for API testing.</p>
+                    <p className="text-gray-300">Learned and applied tools for specialized testing, including **JMeter for Performance Testing** and **Postman for API testing**.</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <ChevronRight size={20} className="text-amber-500 mt-1 flex-shrink-0" />
-                    <p className="text-gray-300">Supported the team by performing Unit Testing procedures and documenting test results and bug reports.</p>
+                    <p className="text-gray-300">Supported the team by performing **Unit Testing** procedures and documenting test results and bug reports.</p>
                   </div>
                 </div>
               </div>
@@ -355,7 +380,7 @@ export default function ProfessionalPortfolio() {
         </div>
       </section>
       
-      {/* Projects Section - UPDATED WITH REDUCED CONTENT */}
+      {/* Projects Section */}
       <section id="projects" className="py-24 px-6 bg-gray-800">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-serif font-bold mb-12 text-center text-white">
@@ -374,7 +399,9 @@ export default function ProfessionalPortfolio() {
                   <h3 className="text-xl font-bold text-white">
                     {project.title}
                   </h3>
-                  <ExternalLink className="text-amber-500 hover:text-white transition-colors flex-shrink-0" size={20} />
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`View project ${project.title}`}>
+                    <ExternalLink className="text-amber-500 hover:text-white transition-colors flex-shrink-0" size={20} />
+                  </a>
                 </div>
 
                 {/* Description (Flex-grow allows this content to expand and fill available space) */}
@@ -407,7 +434,7 @@ export default function ProfessionalPortfolio() {
         </div>
       </section>
 
-      {/* Skills Section (Omitted for brevity) */}
+      {/* Skills Section */}
       <section id="skills" className="py-24 px-6 bg-gray-900">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl font-serif font-bold mb-12 text-center text-white">
@@ -434,7 +461,7 @@ export default function ProfessionalPortfolio() {
         </div>
       </section>
 
-      {/* Education Section (Omitted for brevity) */}
+      {/* Education Section */}
       <section id="education" className="py-24 px-6 bg-gray-800">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-serif font-bold mb-12 text-center text-white">
@@ -468,7 +495,7 @@ export default function ProfessionalPortfolio() {
         </div>
       </section>
 
-      {/* Certifications Section (Omitted for brevity) */}
+      {/* Certifications Section */}
       <section id="certifications" className="py-24 px-6 bg-gray-900">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-serif font-bold mb-12 text-center text-white">
@@ -499,7 +526,7 @@ export default function ProfessionalPortfolio() {
         </div>
       </section>
 
-      {/* Contact Section (Omitted for brevity) */}
+      {/* Contact Section */}
       <section id="contact" className="py-24 px-6 bg-gray-800">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-serif font-bold mb-6 text-white">
@@ -530,7 +557,7 @@ export default function ProfessionalPortfolio() {
         </div>
       </section>
 
-      {/* Footer (Omitted for brevity) */}
+      {/* Footer */}
       <footer className="py-8 px-6 border-t border-gray-700 bg-gray-900">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-gray-400 mb-2">© 2024 Vijayalakshmi Senthilkumar. All rights reserved.</p>
