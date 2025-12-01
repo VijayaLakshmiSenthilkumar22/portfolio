@@ -36,20 +36,6 @@ export default function ProfessionalPortfolio() {
       tech: ['React.js', 'TypeScript', 'React Flow', 'Azure SQL'],
       impact: 'Achieved 99.9% system reliability and reduced design cycle time by 60%.',
       link: '#'
-    },
-    {
-      title: 'AI Resume Shortlisting Platform',
-      description: 'Recruitment automation tool leveraging smart matching algorithms and advanced filtering to drastically reduce manual resume screening effort.',
-      tech: ['React.js', 'TypeScript', 'Material-UI', 'AI Integration'],
-      impact: 'Reduced manual screening effort by 70% while maintaining accuracy.',
-      link: '#'
-    },
-    {
-      title: 'Enterprise HRMS Module',
-      description: 'Core module for managing the employee lifecycle, featuring role-based access control and comprehensive audit logging within a scalable architecture.',
-      tech: ['React.js', 'TypeScript', 'Java Microservices'],
-      impact: 'Streamlined HR operations enterprise-wide using microservices architecture.',
-      link: '#'
     }
   ];
 
