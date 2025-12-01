@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Linkedin, ExternalLink, GraduationCap, Award, Calendar, MapPin, ChevronRight, Menu, X } from 'lucide-react';
 
+// 1. IMPORT THE IMAGE: Assuming ProfessionalPortfolio.jsx is in src/, the image is also in src/.
+// The import name (e.g., profileImage) is arbitrary.
+import profileImage from './image.webp'; 
+
 // Define navigation items with their display name and icon
 const navItems = [
   { name: 'Home', id: 'home', icon: '🏠' },
@@ -115,7 +119,7 @@ export default function ProfessionalPortfolio() {
   return (
     <div className="bg-gray-900 text-white min-h-screen font-sans">
       
-      {/* Navigation */}
+      {/* Navigation (Unchanged) */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-gray-900/95 backdrop-blur-sm shadow-xl' : 'bg-transparent'}`}>
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
@@ -155,7 +159,7 @@ export default function ProfessionalPortfolio() {
         </div>
       </nav>
 
-      {/* Mobile Slide-Out Menu */}
+      {/* Mobile Slide-Out Menu (Unchanged) */}
       <div 
         className={`fixed top-0 left-0 w-full h-full z-40 bg-gray-900 transition-transform duration-300 ease-in-out md:hidden ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
@@ -194,8 +198,13 @@ export default function ProfessionalPortfolio() {
         <section id="home" className="min-h-screen flex items-center justify-center px-6 bg-gray-900">
           <div className="max-w-4xl mx-auto text-center pt-24">
             <div className="mb-6">
-              <div className="w-28 h-28 sm:w-32 sm:h-32 mx-auto mb-6 bg-amber-500 rounded-full flex items-center justify-center shadow-xl">
-                <span className="text-3xl sm:text-4xl font-serif font-bold text-gray-900">VS</span>
+              {/* 2. REPLACE PLACEHOLDER WITH IMAGE */}
+              <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6 rounded-full overflow-hidden shadow-xl border-4 border-amber-500">
+                <img 
+                  src={profileImage} // Use the imported image variable
+                  alt="Vijayalakshmi Senthilkumar Profile"
+                  className="w-full h-full object-cover" // Ensures the image covers the circular container
+                />
               </div>
             </div>
             
@@ -247,7 +256,7 @@ export default function ProfessionalPortfolio() {
           </div>
         </section>
         
-        {/* About Section */}
+        {/* About Section (Unchanged) */}
         <section id="about" className="py-16 sm:py-24 px-6 bg-gray-800">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-10 sm:mb-12 text-center text-white">
@@ -283,7 +292,7 @@ export default function ProfessionalPortfolio() {
           </div>
         </section>
 
-        {/* Experience Section */}
+        {/* Experience Section (Unchanged) */}
         <section id="experience" className="py-16 sm:py-24 px-6 bg-gray-900">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-10 sm:mb-12 text-center text-white">
@@ -370,7 +379,7 @@ export default function ProfessionalPortfolio() {
           </div>
         </section>
         
-      {/* Projects Section - UPDATED IMPLEMENTATION */}
+      {/* Projects Section - UPDATED IMPLEMENTATION (Unchanged) */}
         <section id="projects" className="py-16 sm:py-24 px-6 bg-gray-800">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-10 sm:mb-12 text-center text-white">
@@ -415,7 +424,7 @@ export default function ProfessionalPortfolio() {
                   {/* Key Impact (Visible block) */}
                   <div className="bg-gray-800 p-4 rounded-lg border-l-4 border-amber-500">
                     <div className="text-xs font-semibold text-amber-500 mb-1 flex items-center gap-2">
-                       <Award size={16} /> KEY IMPACT
+                        <Award size={16} /> KEY IMPACT
                     </div>
                     <p className="text-sm text-white italic">
                       {project.impact}
@@ -428,7 +437,7 @@ export default function ProfessionalPortfolio() {
           </div>
         </section>
         
-        {/* Skills Section */}
+        {/* Skills Section (Unchanged) */}
         <section id="skills" className="py-16 sm:py-24 px-6 bg-gray-900">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-10 sm:mb-12 text-center text-white">
@@ -455,7 +464,7 @@ export default function ProfessionalPortfolio() {
           </div>
         </section>
 
-        {/* Education Section */}
+        {/* Education Section (Unchanged) */}
         <section id="education" className="py-16 sm:py-24 px-6 bg-gray-800">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-10 sm:mb-12 text-center text-white">
@@ -489,7 +498,7 @@ export default function ProfessionalPortfolio() {
           </div>
         </section>
 
-        {/* Certifications Section */}
+        {/* Certifications Section (Unchanged) */}
         <section id="certifications" className="py-16 sm:py-24 px-6 bg-gray-900">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-10 sm:mb-12 text-center text-white">
@@ -520,7 +529,7 @@ export default function ProfessionalPortfolio() {
           </div>
         </section>
 
-        {/* Contact Section */}
+        {/* Contact Section (Unchanged) */}
         <section id="contact" className="py-16 sm:py-24 px-6 bg-gray-800">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 sm:mb-6 text-white">
@@ -552,7 +561,7 @@ export default function ProfessionalPortfolio() {
         </section>
       </main>
 
-      {/* Footer */}
+      {/* Footer (Unchanged) */}
       <footer className="py-6 sm:py-8 px-6 border-t border-gray-700 bg-gray-900">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-xs sm:text-sm text-gray-400 mb-2">© 2024 Vijayalakshmi Senthilkumar. All rights reserved.</p>
