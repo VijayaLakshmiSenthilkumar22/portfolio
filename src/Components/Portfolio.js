@@ -3,7 +3,7 @@ import { Mail, Linkedin, ExternalLink, GraduationCap, Award, Calendar, MapPin, C
 
 // 1. IMPORT THE IMAGE: Assuming ProfessionalPortfolio.jsx is in src/, the image is also in src/.
 // The import name (e.g., profileImage) is arbitrary.
-import profileImage from './image.webp'; 
+import profileImage from './image.png'; 
 
 // Define navigation items with their display name and icon
 const navItems = [
