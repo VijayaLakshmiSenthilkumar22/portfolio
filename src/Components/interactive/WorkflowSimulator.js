@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, RotateCcw, RotateCw, Plus, Cpu, RefreshCw, Eye } from 'lucide-react';
+import { Play, RotateCcw, RotateCw, Plus, Cpu, RefreshCw } from 'lucide-react';
 
 const INITIAL_NODES = [
   { id: '1', title: 'Intake Wizard', type: 'Trigger', tech: 'React Hook Form', status: 'idle', color: 'from-blue-500 to-cyan-500' },
@@ -15,7 +15,6 @@ export default function WorkflowSimulator() {
   const [activeStep, setActiveStep] = useState(-1);
   const [history, setHistory] = useState([INITIAL_NODES]);
   const [historyIndex, setHistoryIndex] = useState(0);
-  const [selectedNode, setSelectedNode] = useState(INITIAL_NODES[0]);
   const [simulateRollback, setSimulateRollback] = useState(false);
   const [logs, setLogs] = useState([
     'System ready. Architecture based on Interactive Process Designer.',
@@ -94,7 +93,6 @@ export default function WorkflowSimulator() {
     setNodes(updated);
     setHistory(newHistory);
     setHistoryIndex(newHistory.length - 1);
-    setSelectedNode(newNode);
     addLog(`+ Added custom node: [${newNode.title}] to runtime canvas.`);
   };
 
@@ -104,7 +102,6 @@ export default function WorkflowSimulator() {
     setHistoryIndex(0);
     setActiveStep(-1);
     setIsRunning(false);
-    setSelectedNode(INITIAL_NODES[0]);
     addLog('Reset pipeline to default initial state.');
   };
 
@@ -200,19 +197,15 @@ export default function WorkflowSimulator() {
           {nodes.map((node, idx) => {
             const isCurrent = activeStep === idx;
             const isPast = activeStep > idx;
-            const isSelected = selectedNode?.id === node.id;
 
             return (
               <div
                 key={node.id}
-                onClick={() => setSelectedNode(node)}
-                className={`relative z-10 cursor-pointer flex-1 max-w-[150px] p-3 rounded-2xl border transition-all duration-300 ${
+                className={`relative z-10 flex-1 max-w-[150px] p-3.5 rounded-2xl border transition-all duration-300 ${
                   isCurrent
                     ? 'bg-slate-900 border-cyan-400 ring-4 ring-cyan-400/20 scale-105 shadow-lg shadow-cyan-500/20'
                     : isPast
                     ? 'bg-slate-900 border-emerald-500/60 shadow-sm'
-                    : isSelected
-                    ? 'bg-slate-900 border-indigo-400 shadow-md'
                     : 'bg-slate-900/90 border-slate-800 hover:border-slate-700'
                 }`}
               >
@@ -232,7 +225,7 @@ export default function WorkflowSimulator() {
                   />
                 </div>
 
-                <div className={`text-xs font-bold tracking-tight text-white truncate ${isSelected ? 'text-cyan-300' : ''}`}>
+                <div className="text-xs font-bold tracking-tight text-white truncate">
                   {node.title}
                 </div>
                 <div className="text-[10px] text-slate-400 truncate mt-0.5">
@@ -247,62 +240,31 @@ export default function WorkflowSimulator() {
         </div>
       </div>
 
-      {/* Simulator Details & Live Console Strip */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-4 border-t border-slate-800">
-        {/* Node Inspector */}
-        <div className="md:col-span-5 p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Eye size={13} className="text-cyan-400" />
-              Node Properties
-            </span>
-            <span className="text-[10px] text-cyan-400 font-mono">
-              ID: #{selectedNode.id}
-            </span>
-          </div>
-          <div className="space-y-1.5 text-xs">
-            <div className="flex justify-between">
-              <span className="text-slate-400">Node Name:</span>
-              <span className="font-semibold text-white">{selectedNode.title}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-400">Module Type:</span>
-              <span className="text-cyan-300 font-medium">{selectedNode.type}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-400">Underlying Stack:</span>
-              <span className="text-slate-200 font-mono">{selectedNode.tech}</span>
-            </div>
-            <div className="flex justify-between pt-1 border-t border-slate-800/80">
-              <span className="text-slate-400">Rollback Safety:</span>
-              <span className="text-emerald-400 font-semibold">Active (Optimistic)</span>
-            </div>
-          </div>
-
-          <div className="mt-3 pt-2 flex items-center justify-between text-[11px]">
-            <label className="flex items-center gap-2 cursor-pointer text-slate-300">
-              <input
-                type="checkbox"
-                checked={simulateRollback}
-                onChange={(e) => setSimulateRollback(e.target.checked)}
-                className="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0"
-              />
-              <span>Simulate API Error & Rollback</span>
-            </label>
-          </div>
-        </div>
-
-        {/* Live Execution Telemetry Logs */}
-        <div className="md:col-span-7 p-4 rounded-2xl bg-slate-950 border border-slate-800 font-mono text-[11px] flex flex-col justify-between">
+      {/* Live Execution Telemetry Console (Full Width) */}
+      <div className="pt-4 border-t border-slate-800">
+        <div className="p-4 sm:p-5 rounded-2xl bg-slate-950 border border-slate-800 font-mono text-[11px] flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-slate-400 text-xs">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-slate-800 text-slate-400 text-xs">
               <span className="flex items-center gap-1.5">
                 <Cpu size={13} className="text-indigo-400" />
                 Pipeline Telemetry Logs
               </span>
-              <span className="text-[10px] text-emerald-400">● 95%+ High Availability</span>
+
+              <div className="flex items-center gap-4">
+                <label className="flex items-center gap-2 cursor-pointer text-slate-300 text-xs font-sans">
+                  <input
+                    type="checkbox"
+                    checked={simulateRollback}
+                    onChange={(e) => setSimulateRollback(e.target.checked)}
+                    className="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0"
+                  />
+                  <span>Simulate API Error & Rollback</span>
+                </label>
+                <span className="text-[10px] text-emerald-400 hidden sm:inline">● 95%+ High Availability</span>
+              </div>
             </div>
-            <div className="space-y-1 text-slate-300 min-h-[75px]">
+
+            <div className="space-y-1.5 text-slate-300 min-h-[75px]">
               {logs.map((log, lIdx) => (
                 <div key={lIdx} className="leading-relaxed truncate">
                   <span className="text-slate-500 mr-2">&gt;</span>
@@ -313,7 +275,8 @@ export default function WorkflowSimulator() {
               ))}
             </div>
           </div>
-          <div className="pt-2 text-[10px] text-slate-500 flex justify-between items-center">
+
+          <div className="pt-2.5 mt-2 border-t border-slate-800/80 text-[10px] text-slate-500 flex justify-between items-center">
             <span>Redux State History: {historyIndex + 1}/{history.length}</span>
             <span className="text-slate-400">60% Code Duplication Reduced</span>
           </div>
