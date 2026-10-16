@@ -1,17 +1,9 @@
 import React from 'react';
-import { Building2, Send, Clock, CheckCircle2 } from 'lucide-react';
+import { Send, Clock, CheckCircle2 } from 'lucide-react';
 import { resumeData } from '../../data/resumeData';
 
 export default function ChennaiRelocationBadge() {
   const { personal } = resumeData;
-
-  const hubs = [
-    'OMR / IT Corridor',
-    'Guindy Tech Zone',
-    'Tidel Park',
-    'DLF Cybercity (Porur)',
-    'Ambattur IT Park',
-  ];
 
   return (
     <div className="relative overflow-hidden rounded-3xl p-6 sm:p-7 bg-gradient-to-r from-emerald-950/40 via-cyan-950/40 to-slate-900 border border-emerald-500/40 shadow-2xl shadow-emerald-500/10">
@@ -46,24 +38,8 @@ export default function ChennaiRelocationBadge() {
           </h3>
 
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
-            Currently based in <strong className="text-white">Madurai</strong>, fully ready and flexible to relocate to <strong className="text-emerald-400">Chennai</strong> for on-site, hybrid, or remote positions across all major technology corridors.
+            Currently based in <strong className="text-white">Madurai</strong>, fully ready and flexible to relocate to <strong className="text-emerald-400">Chennai</strong> for on-site, hybrid, or remote full-stack engineering opportunities.
           </p>
-
-          {/* Chennai Hub Pills */}
-          <div className="flex flex-wrap items-center gap-2 pt-1">
-            <span className="text-xs text-slate-400 font-semibold flex items-center gap-1 mr-1">
-              <Building2 size={14} className="text-emerald-400" />
-              Target Hubs:
-            </span>
-            {hubs.map((hub) => (
-              <span
-                key={hub}
-                className="px-2.5 py-0.5 rounded-lg text-xs font-medium bg-slate-800/80 text-emerald-300 border border-emerald-500/30"
-              >
-                {hub}
-              </span>
-            ))}
-          </div>
         </div>
 
         {/* Right Side: Quick Action CTA */}

@@ -42,7 +42,6 @@ export default function DevTerminal({ onOpenResume }) {
   Current Base:     Madurai, Tamil Nadu, India
   Target Location:  CHENNAI, TAMIL NADU (Primary Preferred)
   Relocation:       Immediate / 100% Ready
-  Target Hubs:      OMR / IT Corridor, Guindy, Tidel Park, DLF Porur
   Work Mode:        On-Site, Hybrid, or Remote`,
         });
         break;

@@ -10,7 +10,6 @@ export const resumeData = {
     currentLocation: "Madurai, Tamil Nadu, India",
     relocationTarget: "Chennai, Tamil Nadu, India",
     relocationStatus: "Actively Relocating to Chennai (Immediate Joiner / On-site / Hybrid)",
-    targetHubs: "Chennai Tech Hubs (OMR, Guindy, Tidel Park, DLF, Porur)",
     linkedin: "https://www.linkedin.com/in/vijayalakshmi-senthilkumar-89b0b22b1",
     github: "https://github.com/VijayaLakshmiSenthilkumar22",
     availability: "Immediate / Actively Relocating to Chennai",
