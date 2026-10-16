@@ -12,7 +12,7 @@ export const resumeData = {
     relocationStatus: "Actively Relocating to Chennai (Immediate Joiner / On-site / Hybrid)",
     targetHubs: "Chennai Tech Hubs (OMR, Guindy, Tidel Park, DLF, Porur)",
     linkedin: "https://www.linkedin.com/in/vijayalakshmi-senthilkumar-89b0b22b1",
-    github: "https://github.com",
+    github: "https://github.com/VijayaLakshmiSenthilkumar22",
     availability: "Immediate / Actively Relocating to Chennai",
     summary:
       "Full Stack Software Engineer with 2.1 years of experience in designing, developing, and deploying scalable web applications using React.js, TypeScript, JavaScript, Node.js, Python (FastAPI), SQL, PostgreSQL, MySQL, and MongoDB. Proven expertise in frontend development, backend API development, database management across relational and NoSQL databases, and end-to-end product development. Skilled in building high-performance RESTful APIs with FastAPI and Node.js, configurable product modules, and reusable components to meet dynamic business requirements. Actively seeking Full Stack Software Engineering opportunities in Chennai, India with readiness for immediate relocation.",
